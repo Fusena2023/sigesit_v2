@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  @include('template.penggunaheader')
+
+  <style type="text/css">
+  .nav-item{
+    border-width: 2px;
+    border-style: outset;
+    border-radius: 40px;
+  }
+  </style>
+  
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+	  
+	  @include('template.penggunanavbarfaq')
+
+    <section class="ftco-section ftco-no-pb" id="layanandigital-section">
+      <div class="container">
+        <div class="row justify-content-center pb-5">
+          <div class="col-md-6 heading-section text-center ftco-animate">
+            <h2 class="mb-4">Tiket Anda</h2>
+            <p>List Tiket Dari Layanan - Layanan Pelayanan Terpadu Inforrmasi Geospasial</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-3 ftco-animate">
+            <div class="staff">
+              <div class="img-wrap d-flex align-items-stretch">
+                <div class="img align-self-stretch" style="background-image: url('{{ Storage::url('public/'). $layananjasa }}');"></div>
+              </div>
+              <div class="text d-flex align-items-center pt-3 text-center">
+                <div>
+                  <span class="position mb-4"><a id="layananjasa">Layanan Jasa</a></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 ftco-animate">
+            <div class="staff">
+              <div class="img-wrap d-flex align-items-stretch">
+                <div class="img align-self-stretch" style="background-image: url('{{ Storage::url('public/'). $layananproduk }}');"></div>
+              </div>
+              <div class="text d-flex align-items-center pt-3 text-center">
+                <div>
+                  <span class="position mb-4"><a id="layananproduk">Layanan Produk</a></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 ftco-animate">
+            <div class="staff">
+              <div class="img-wrap d-flex align-items-stretch">
+                <div class="img align-self-stretch" style="background-image: url('{{ Storage::url('public/'). $layanandiklat }}');"></div>
+              </div>
+              <div class="text d-flex align-items-center pt-3 text-center">
+                <div>
+                  <span class="position mb-4"><a id="layanandiklat">Layanan Diklat</a></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 ftco-animate">
+            <div class="staff">
+              <div class="img-wrap d-flex align-items-stretch">
+                <div class="img align-self-stretch" style="background-image: url('{{ Storage::url('public/'). $layanankunjunganumum }}');"></div>
+              </div>
+              <div class="text d-flex align-items-center pt-3 text-center">
+                <div>
+                  <span class="position mb-4"><a id="layanankunjunganumum">Layanan Konsultasi Teknis</a></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <section class="ftco-section contact-section ftco-no-pt ftco-no-pb" id="contact-section-jasa">
+      <div class="container">
+        <div class="row justify-content-center pb-4">
+          <div class="col-md-7 heading-section text-center ftco-animate fadeInUp ftco-animated">
+            <span class="subheading">Layanan Jasa</span>
+          </div>
+        </div>
+        <a href="{{ route('pengguna.tiketlayananjasa') }}" class="btn btn-primary px-3 py-2">Buat Tiket Layanan Jasa</a>
+        <div class="row no-gutters block-9">
+          <div class="col-md-12 pt-3">
+                <table class="table table-bordered" id="users-table-jasa">
+                    <thead>
+                        <tr>
+                            <th>No.Tiket</th>
+                            <th>Tanggal</th>
+                            <th>Waktu</th>
+                            <th>Kategori Layanan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                </table>
+                <br>
+                <br>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section contact-section ftco-no-pt ftco-no-pb" id="contact-section-produk" style="display: none;">
+      <div class="container">
+        <div class="row justify-content-center pb-4">
+          <div class="col-md-7 heading-section text-center ftco-animate fadeInUp ftco-animated">
+            <span class="subheading">Layanan Produk</span>
+          </div>
+        </div>
+        <a href="{{ route('pengguna.tiketlayananproduk') }}" class="btn btn-primary px-3 py-2">Buat Tiket Layanan Produk</a>
+        <div class="row no-gutters block-9">
+          <div class="col-md-12 pt-3">
+                <table class="table table-bordered" id="users-table-produk">
+                    <thead>
+                        <tr>
+                            <th>No.Tiket</th>
+                            <th>Tanggal</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                </table>
+                <br>
+                <br>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section contact-section ftco-no-pt ftco-no-pb" id="contact-section-diklat" style="display: none;">
+      <div class="container">
+        <div class="row justify-content-center pb-4">
+          <div class="col-md-7 heading-section text-center ftco-animate fadeInUp ftco-animated">
+            <span class="subheading">Layanan Diklat</span>
+          </div>
+        </div>
+        <a href="{{ route('pengguna.tiketlayanandiklat') }}" class="btn btn-primary px-3 py-2">Buat Tiket Layanan Diklat</a>
+        <div class="row no-gutters block-9">
+          <div class="col-md-12 pt-3">
+                <table class="table table-bordered" id="users-table-diklat">
+                    <thead>
+                        <tr>
+                            <th>No.Tiket</th>
+                            <th>Tanggal</th>
+                            <th>Waktu</th>
+                            <th>Kategori Layanan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                </table>
+                <br>
+                <br>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section contact-section ftco-no-pt ftco-no-pb" id="contact-section-kunjunganumum" style="display: none;">
+      <div class="container">
+        <div class="row justify-content-center pb-4">
+          <div class="col-md-7 heading-section text-center ftco-animate fadeInUp ftco-animated">
+            <span class="subheading">Layanan Konsultasi Teknis</span>
+          </div>
+        </div>
+        <a href="{{ route('pengguna.tiketlayanankunjunganumum') }}" class="btn btn-primary px-3 py-2">Buat Tiket Layanan Konsultasi Teknis</a>
+        <div class="row no-gutters block-9">
+          <div class="col-md-12 pt-3">
+                <table class="table table-bordered" id="users-table-kunjunganumum">
+                    <thead>
+                        <tr>
+                            <th>No.Tiket</th>
+                            <th>Tanggal</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                </table>
+                <br>
+                <br>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    @include('template.penggunafooter')
+
+    <script>
+      $(function() {
+          $('#users-table-jasa').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "{{ route('pengguna.datatables.getdatatiketlayananjasa') }}",
+              columns: [
+                  { data: 'no_tiket', name: 'no_tiket' },
+                  { data: 'tanggal', name: 'tanggal' },
+                  { data: 'mulai', name: 'mulai' },
+                  { data: 'nama_layanan_jasa', name: 'nama_layanan_jasa' },
+                  { data: 'action', name: 'action', orderable: false, searchable: false}
+              ]
+          });
+      });
+    </script>
+    <script>
+      $(function() {
+          $('#users-table-produk').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "{{ route('pengguna.datatables.getdatatiketlayananproduk') }}",
+              columns: [
+                  { data: 'no_tiket', name: 'no_tiket' },
+                  { data: 'tanggal', name: 'tanggal' },
+                  { data: 'action', name: 'action', orderable: false, searchable: false}
+              ]
+          });
+      });
+    </script>
+    <script>
+      $(function() {
+          $('#users-table-diklat').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "{{ route('pengguna.datatables.getdatatiketlayanandiklat') }}",
+              columns: [
+                  { data: 'no_tiket', name: 'no_tiket' },
+                  { data: 'tanggal', name: 'tanggal' },
+                  { data: 'mulai', name: 'mulai' },
+                  { data: 'nama_layanan_diklat', name: 'nama_layanan_diklat' },
+                  { data: 'action', name: 'action', orderable: false, searchable: false}
+              ]
+          });
+      });
+    </script>
+    <script>
+      $(function() {
+          $('#users-table-kunjunganumum').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "{{ route('pengguna.datatables.getdatatiketlayanankunjunganumum') }}",
+              columns: [
+                  { data: 'no_tiket', name: 'no_tiket' },
+                  { data: 'tanggal', name: 'tanggal' },
+                  { data: 'action', name: 'action', orderable: false, searchable: false}
+              ]
+          });
+      });
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+
+
+        $("#layananjasa").click(function(){
+          $("#contact-section-jasa").css("display", "block");
+          $("#contact-section-produk").css("display", "none");
+          $("#contact-section-diklat").css("display", "none");
+          $("#contact-section-kunjunganumum").css("display", "none");
+        });
+
+        $("#layananproduk").click(function(){
+          $("#contact-section-produk").css("display", "block");
+          $("#contact-section-jasa").css("display", "none");
+          $("#contact-section-diklat").css("display", "none");
+          $("#contact-section-kunjunganumum").css("display", "none");
+        });
+        $("#layanandiklat").click(function(){
+          $("#contact-section-diklat").css("display", "block");
+          $("#contact-section-produk").css("display", "none");
+          $("#contact-section-jasa").css("display", "none");
+          $("#contact-section-kunjunganumum").css("display", "none");
+        });
+
+        $("#layanankunjunganumum").click(function(){
+          $("#contact-section-kunjunganumum").css("display", "block");
+          $("#contact-section-produk").css("display", "none");
+          $("#contact-section-diklat").css("display", "none");
+          $("#contact-section-jasa").css("display", "none");
+        });
+
+
+      });
+    </script>
+          @if(Session::has('success'))
+              <script type="text/javascript">
+                    Swal.fire({
+                    type: 'success',
+                    text: '{{Session::get("success")}}',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+              </script>
+              <?php
+                  Session::forget('success');
+              ?>
+          @endif
+    
+  </body>
+</html>

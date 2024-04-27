@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+  @include('template.penggunaheader')
+
+  <style type="text/css">
+  .nav-item{
+    border-width: 2px;
+    border-style: outset;
+    border-radius: 40px;
+  }
+  </style>
+
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+	  
+	  @include('template.penggunanavbar')
+
+	  <section id="home-section" class="hero">
+	  	
+		  <div class="home-slider js-fullheight owl-carousel">
+	      <div class="slider-item js-fullheight">
+	      	<div class="overlay"></div>
+	        <div class="container-fluid p-0">
+	          <div class="row d-md-flex no-gutters slider-text js-fullheight align-items-center justify-content-end" data-scrollax-parent="true">
+	          	<div class="one-third order-md-last img js-fullheight" style="background-image:url(../assets/digilab/images/banner.png);width:100%;margin-top: 5%;">
+	          		<div class="overlay"></div>
+	          	</div>
+		          <div class="one-forth d-flex js-fullheight align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+		          	<!--<div class="text" style="padding: 470px 0px 0px 150px;">
+			            <p><a href="{{route('register')}}" class="btn btn-primary px-5 py-3 mt-3">Daftar</a></p>-->
+		            </div>
+		          </div>
+	        	</div>
+	        </div>
+	      </div>
+	    </div>
+    </section>
+
+    <section class="ftco-section ftco-project bg-success" id="projects-section">
+      <div class="container px-md-5">
+        <div class="row justify-content-center pb-5">
+          <div class="col-md-12 heading-section text-center ftco-animate">
+            <span><font color="black">Pilihan Layanan</font></span>
+            <h2 class="mb-4"><font color="#0c87be">Layanan Kami</font></h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 testimonial">
+            <div class="carousel-project owl-carousel">
+              @foreach($masterjenislayanan as $mjl)
+                <div class="item">
+                  <div class="project">
+                    <div class="img">
+                      <img src="{{ Storage::url('public/'). $mjl->icon }}" class="img-fluid" alt="Colorlib Template">
+                      <div class="text px-4">
+                        <h3><a href="{{ $mjl->url }}">{{ $mjl->jenis_layanan }}</a></h3>
+                        <span>{{ $mjl->deskripsi }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              @endforeach
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section ftco-no-pb ftco-no-pt ftco-services bg-light2" id="services-section">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <br><br><span><font color="orange" size="6">Layanan Jasa</font></span>
+          </div>
+        </div>
+        <div class="row no-gutters">
+          <div class="col-md-4 ftco-animate py-5 nav-link-wrap">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              @foreach($masterlayananjasa as $mlj)
+                <a class="nav-link px-4 {{$mlj->status}}" id="v-pills-{{$mlj->id}}-tab" data-toggle="pill" href="#v-pills-{{$mlj->id}}" role="tab" aria-controls="v-pills-{{$mlj->id}}" aria-selected="true"><span class="mr-2 {{$mlj->icon}}"></span><font size="4">{{$mlj->nama_layanan_jasa}}</font></a>
+              @endforeach
+            </div>
+          </div>
+          <div class="col-md-8 ftco-animate p-4 p-md-5 d-flex align-items-center">
+            
+            <div class="tab-content pl-md-5" id="v-pills-tabContent">
+              @foreach($masterlayananjasa as $mlj)
+                <div class="tab-pane fade show {{$mlj->status}} py-5" id="v-pills-{{$mlj->id}}" role="tabpanel" aria-labelledby="v-pills-{{$mlj->id}}-tab">
+                  @if(!empty($mlj->gambar))
+                    <img src="{{ Storage::url('public/'). $mlj->gambar }}" class="img-fluid" alt="Colorlib Template">
+                  @endif
+                  <h4 class="mb-4">{{$mlj->nama_layanan_jasa}}</h4>
+                  <p>{{$mlj->deskripsi}}</p>  
+                  <p>
+@if(Auth::guard('pengguna')->check())
+<a href="{{route('pengguna.tiket')}}" class="btn btn-primary px-4 py-3">Buat Tiket</a>
+@else
+<a href="{{ route('login') }}" class="btn btn-primary px-4 py-3">Buat Tiket</a></p>
+@                </div>
+              @endforeach
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- <section class="ftco-section-2 img" style="background-image: url(../public/assets/digilab/images/bg_3.jpg);" id="services-section2">
+    	<div class="container">
+    		<div class="row d-md-flex justify-content-end">
+    			<div class="col-md-6">
+    				<div class="row">
+    					<div class="col-md-12">
+    						<a href="#" class="services-wrap ftco-animate">
+    							<div class="icon d-flex justify-content-center align-items-center">
+    								<span class="ion-ios-arrow-back"></span>
+    								<span class="ion-ios-arrow-forward"></span>
+    							</div>
+    							<h2>Market Research</h2>
+    							<p>Even the all-powerful Pointing has no control about the blind.</p>
+    						</a>
+    						<a href="#" class="services-wrap ftco-animate">
+    							<div class="icon d-flex justify-content-center align-items-center">
+    								<span class="ion-ios-arrow-back"></span>
+    								<span class="ion-ios-arrow-forward"></span>
+    							</div>
+    							<h2>Financial Services</h2>
+    							<p>Even the all-powerful Pointing has no control about the blind.</p>
+    						</a>
+    						<a href="#" class="services-wrap ftco-animate">
+    							<div class="icon d-flex justify-content-center align-items-center">
+    								<span class="ion-ios-arrow-back"></span>
+    								<span class="ion-ios-arrow-forward"></span>
+    							</div>
+    							<h2>Online Marketing</h2>
+    							<p>Even the all-powerful Pointing has no control about the blind.</p>
+    						</a>
+    						<a href="#" class="services-wrap ftco-animate">
+    							<div class="icon d-flex justify-content-center align-items-center">
+    								<span class="ion-ios-arrow-back"></span>
+    								<span class="ion-ios-arrow-forward"></span>
+    							</div>
+    							<h2>24/7 Help &amp; Support</h2>
+    							<p>Even the all-powerful Pointing has no control about the blind.</p>
+    						</a>
+    					</div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+    </section> -->
+    <section class="ftco-section ftco-no-pb ftco-no-pt ftco-services bg-success" id="services-section2">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div style="margin-top: 100px;" class="col-md-7 heading-section text-center ftco-animate">
+            <span><font color="white" size="6">Layanan Produk</font></span>
+            <p><font color="#0c87be">Berbagai macam produk yang dimiliki Badan Informasi Geospasial sebagai berikut.</font></p>
+             <p><a href="{{ route('login') }}" class="btn btn-primary px-4 py-3">Buat Tiket</a></p>
+          </div>
+        </div>
+         <div class="row">
+              <?php $jum= count($resProduk['data']);$i=0;?>
+                @for($i;$i<$jum;$i++)
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="offer offer-radius offer-info">
+                        <div class="shape">
+                            <div class="shape-text">
+                                BIG
+                            </div>
+                        </div>
+                        <div class="offer-content">
+                            <h3 class="lead">
+                                {{ $resProduk['data'][$i]['jenis_produk']['nama']}}
+                            </h3>
+                            <p>{{ $resProduk['data'][$i]['nama_produk']}}</p>
+                        </div>
+                    </div>
+                </div>
+                @endfor
+            </div>
+      </div>
+    </section>
+    
+    <section class="ftco-section ftco-no-pb ftco-no-pt ftco-services bg-light2" id="services-section3">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div style="margin-top: 50px;" class="col-md-7 heading-section text-center ftco-animate">
+            <span class="subheading"><font size="6">Layanan Diklat</font></span>
+          </div>
+        </div>
+        <div class="row no-gutters">
+          <div class="col-md-4 ftco-animate py-5 nav-link-wrap">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              @foreach($masterlayanandiklat as $mlj)
+                <a class="nav-link px-4 {{$mlj->status}}" id="v-pills-{{$mlj->id}}-tab" data-toggle="pill" href="#v-pills-{{$mlj->id}}" role="tab" aria-controls="v-pills-{{$mlj->id}}" aria-selected="true"><span class="mr-2 {{$mlj->icon}}"></span><font size="4">{{$mlj->nama_layanan_diklat}}</font></a>
+              @endforeach
+            </div>
+          </div>
+          <div class="col-md-8 ftco-animate p-4 p-md-5 d-flex align-items-center">
+            
+            <div class="tab-content pl-md-5" id="v-pills-tabContent">
+              @foreach($masterlayanandiklat as $mlj)
+                <div class="tab-pane fade show {{$mlj->status}} py-5" id="v-pills-{{$mlj->id}}" role="tabpanel" aria-labelledby="v-pills-{{$mlj->id}}-tab">
+                  @if(!empty($mlj->gambar))
+                    <img src="{{ Storage::url('public/'). $mlj->gambar }}" class="img-fluid" alt="Colorlib Template">
+                  @endif
+                  <h4 class="mb-4">{{$mlj->nama_layanan_diklat}}</h4>
+                  <?php echo $mlj->deskripsi ;?>
+                  <p><a href="{{ route('login') }}" class="btn btn-primary px-4 py-3">Buat Tiket</a></p>
+                </div>
+              @endforeach
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section bg-success" id="layanandigital-section">
+      <div class="container">
+        <div class="row justify-content-center pb-5">
+          <div class="col-md-6 heading-section text-center ftco-animate">
+            <h2 class="mb-4">Layanan Digital</h2>
+            <p><font color="#0c87be">Layanan - Layanan Lain atau Website - Website yang Terdapat di Badan Informasi Geospasial</font></p>
+          </div>
+        </div>
+        <div class="row">
+        @foreach($masterlayanandigital as $mld)
+          <div class="col-md-6 col-lg-3 ftco-animate">
+            <div class="staff">
+              <div class="img-wrap d-flex align-items-stretch">
+                <div class="img align-self-stretch" style="background-image: url('{{ Storage::url('public/'). $mld->icon }}');"></div>
+              </div>
+              <div class="text d-flex align-items-center pt-3 text-center">
+                <div>
+                  <span class="position mb-4"><a href="{{$mld->url}}" target="_blank"><strong>{{$mld->nama_layanan}}</strong></a></span>
+                  <p class="mb-2">{{$mld->deskripsi}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        @endforeach
+        </div>
+      </div>
+    </section>
+
+    <!--<section class="ftco-section bg-light" id="blog-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-5">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <span class="subheading">Berita</span>
+            <h2 class="mb-4">Berita</h2>
+            <p>Berita Seputar Badan Informasi Geospasial dan Aplikasi Pelayanan Terpadu Informasi Geospasial</p>
+          </div>
+        </div>
+        <div class="row d-flex">
+        @foreach($masterberita as $mb)
+          <div class="col-md-4 d-flex ftco-animate">
+            <div class="blog-entry justify-content-end">
+              <a class="block-20" style="background-image: url('{{ Storage::url('public/'). $mb->gambar }}');">
+              </a>
+              <div class="text mt-3 float-right d-block">
+                <div class="d-flex align-items-center pt-2 mb-4 topp">
+                  @if($mb->updated_at == null)
+                    <div class="one mr-2">
+                      <span class="day">
+                          {{ $mb->created_at->format('d') }}
+                      </span>
+                    </div>
+                    <div class="two">
+                      <span class="yr">{{ $mb->created_at->format('Y') }}</span>
+                      <span class="mos">{{ $mb->created_at->format('M') }}</span>
+                    </div>
+                    @else
+                    <div class="one mr-2">
+                      <span class="day">
+                          {{ $mb->updated_at->format('d') }}
+                      </span>
+                    </div>
+                    <div class="two">
+                      <span class="yr">{{ $mb->updated_at->format('Y') }}</span>
+                      <span class="mos">{{ $mb->updated_at->format('M') }}</span>
+                    </div>
+                  @endif
+                </div>
+                <h3 class="heading"><a onclick="lihat('{{$mb->id}}','{{$mb->judul}}','{{$mb->deskripsi}}','{{$mb->gambar}}','{{$mb->created_at}}','{{$mb->updated_at}}')">{{ $mb->judul }}</a></h3>
+                <?php echo str_limit($mb->deskripsi, $limit = 100, $end = '...') ?>
+                <div class="d-flex align-items-center mt-4 meta">
+                  <p class="ml-auto mb-0"><a onclick="lihat('{{$mb->id}}','{{$mb->judul}}','{{$mb->deskripsi}}','{{$mb->gambar}}','{{$mb->created_at}}','{{$mb->updated_at}}')" class="btn btn-primary"> Baca Selengkapnya <span class="ion-ios-arrow-round-forward"></span></a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        @endforeach
+        </div>
+      </div>
+    </section>-->
+
+    <section class="ftco-counter img ftco-section ftco-no-pt ftco-no-pb" id="about-section">
+      <div class="container">
+        <div class="row d-flex">
+          <div class="col-md-6 col-lg-5 d-flex">
+            <div class="img d-flex align-self-stretch align-items-center" style="background-image:url(../assets/digilab/images/geospasial-9.png);background-position: center;">
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-7 pl-lg-5 py-5">
+            <div class="py-md-5">
+              <div class="row justify-content-start pb-3">
+                <div class="col-md-12 heading-section ftco-animate">
+                  <span class="subheading">Aplikasi Pelayanan Terpadu Informasi Geospasial (PTIG)</span>
+                  <h2 class="mb-4" style="font-size: 34px; text-transform: capitalize;">BADAN INFORMASI GEOSPASIAL</h2>
+                  @foreach($mastertentang as $mt)
+                   <p>{{$mt->deskripsi}}</p>
+                  @endforeach
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section contact-section ftco-no-pb bg-light2" id="contact-section">
+      <div class="container">
+      	<div class="row justify-content-center mb-5 pb-3">
+          <div class="col-md-7 heading-section text-center ftco-animate">
+            <span class="subheading">Lokasi</span>
+            <h2 class="mb-4">Kontak & Lokasi</h2>
+          </div>
+        </div>
+        @foreach($masterlokasi as $ml)
+          <div class="row d-flex contact-info mb-5">
+            <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+            	<div class="align-self-stretch box p-4 text-center">
+            		<div class="icon d-flex align-items-center justify-content-center">
+            			<span class="icon-map-signs"></span>
+            		</div>
+            		<h3 class="mb-4">Alamat BIG</h3>
+  	            <p>{{ $ml->lokasi_big }}</p>
+  	          </div>
+            </div>
+            <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+              <div class="align-self-stretch box p-4 text-center">
+                <div class="icon d-flex align-items-center justify-content-center">
+                  <span class="icon-building"></span>
+                </div>
+                <h3 class="mb-4">Lokasi Tatap Muka</h3>
+                <p>{{ $ml->lokasi_tatapmuka }}</a></p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+            	<div class="align-self-stretch box p-4 text-center">
+            		<div class="icon d-flex align-items-center justify-content-center">
+            			<span class="icon-phone2"></span>
+            		</div>
+            		<h3 class="mb-4">Nomor Telepon</h3>
+  	            <p><a href="tel://{{ $ml->telpon }}">{{ $ml->telpon }}</a></p>
+  	          </div>
+            </div>
+            <div class="col-md-6 col-lg-3 d-flex ftco-animate">
+            	<div class="align-self-stretch box p-4 text-center">
+            		<div class="icon d-flex align-items-center justify-content-center">
+            			<span class="icon-paper-plane"></span>
+            		</div>
+            		<h3 class="mb-4">Email & Website</h3>
+  	            <p><a href="mailto:{{ $ml->email }}">{{ $ml->email }}</a><br><a href="{{ $ml->website }}">{{ $ml->website }}</a></p>
+  	          </div>
+            </div>
+          </div>
+        @endforeach
+      </div>
+    </section>
+
+    <section class="ftco-counter img ftco-section ftco-no-pt ftco-no-pb bg-light" id="about-section">
+      <div class="container">
+        <div class="row d-flex">
+          <div class="col-md-6 col-lg-5 d-flex">
+            <div class="img d-flex align-self-stretch align-items-center" style="background-image:url(../assets/digilab/images/fotodepan.jpg);background-position: center;">
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-7 pl-lg-5 py-5">
+            <div class="py-md-5">
+              <div class="bg-white">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.2536980088485!2d106.847761014363!3d-6.48952526525231!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c1bb1acd1965%3A0x709d5406c97d2b1c!2sBadan+Informasi+Geospasial!5e0!3m2!1sid!2sid!4v1557307916896!5m2!1sid!2sid" width="555" height="450" frameborder="0" style="border:0" allowfullscreen></iframe> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+		
+
+    @include('template.penggunafooter')
+
+    <script type="text/javascript">
+      function lihat(id,judul,deskripsi,gambar,created_at,updated_at){
+        var ico = '{{ Storage::url("public/") }}' + gambar;
+        Swal.fire({
+          title: '<h3><br><b>' + judul + '</b></h3>',
+          html: '<div style="text-align:left;"><br><font size="2">' + deskripsi + '</font></div><br><hr>',
+          imageUrl: ico,
+          imageAlt: 'Custom image',
+          animation: true,
+          width: '60%'
+        })
+      }
+    </script>
+    
+  </body>
+</html>
